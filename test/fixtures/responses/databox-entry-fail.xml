@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+  <soapenv:Body>
+    <ns:getDataboxEntryResponse xmlns:ns="https://finanzonline.bmf.gv.at/fon/ws/databox">
+      <rc>2</rc>
+      <msg>Failure</msg>
+    </ns:getDataboxEntryResponse>
+  </soapenv:Body>
+</soapenv:Envelope>

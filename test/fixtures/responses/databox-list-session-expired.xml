@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+  <soapenv:Body>
+    <ns:getDataboxResponse xmlns:ns="https://finanzonline.bmf.gv.at/fon/ws/databox">
+      <rc>-1</rc>
+      <msg>Session expired</msg>
+    </ns:getDataboxResponse>
+  </soapenv:Body>
+</soapenv:Envelope>

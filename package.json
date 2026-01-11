@@ -1,0 +1,56 @@
+{
+  "name": "finanzonline-ts",
+  "version": "0.1.0",
+  "description": "Read-only TypeScript client and CLI for the Austrian FinanzOnline DataBox API.",
+  "type": "module",
+  "bin": {
+    "finanzonline": "dist/cli.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./cli": {
+      "types": "./dist/cli.d.ts",
+      "default": "./dist/cli.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "oxlint src test",
+    "test": "vitest run --coverage",
+    "test:watch": "vitest",
+    "test:bun": "bun run test",
+    "dev": "tsx src/cli.ts"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "commander": "^12.1.0",
+    "dotenv": "^16.4.5",
+    "fast-xml-parser": "^4.4.1",
+    "toml": "^3.0.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.6",
+    "@vitest/coverage-v8": "2.1.9",
+    "oxlint": "^0.10.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.7"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/manmal/finanzonline-ts.git"
+  }
+}

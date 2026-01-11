@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+  <soapenv:Body>
+    <ns:getDataboxResponse xmlns:ns="https://finanzonline.bmf.gv.at/fon/ws/databox">
+      <rc>0</rc>
+      <result>
+        <stnr>999</stnr>
+        <name>Test</name>
+        <anbringen>E1</anbringen>
+        <zrvon>2024</zrvon>
+        <zrbis>2024</zrbis>
+        <datbesch>2024-02-01</datbesch>
+        <erltyp>B</erltyp>
+        <fileart>TXT</fileart>
+        <ts_zust>2024-02-02T10:00:00Z</ts_zust>
+        <applkey>CCC333</applkey>
+        <filebez>Unknown</filebez>
+        <status>UNKNOWN</status>
+      </result>
+    </ns:getDataboxResponse>
+  </soapenv:Body>
+</soapenv:Envelope>

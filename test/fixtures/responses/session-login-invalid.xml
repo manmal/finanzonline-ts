@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+  <soapenv:Body>
+    <ns:loginResponse xmlns:ns="https://finanzonline.bmf.gv.at/fon/ws/session">
+      <id></id>
+      <rc>-4</rc>
+      <msg>Not authorized</msg>
+    </ns:loginResponse>
+  </soapenv:Body>
+</soapenv:Envelope>

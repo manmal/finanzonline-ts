@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+  <soapenv:Body>
+    <ns:getDataboxResponse xmlns:ns="https://finanzonline.bmf.gv.at/fon/ws/databox">
+      <rc>0</rc>
+      <msg>OK</msg>
+      <result>
+        <stnr>123</stnr>
+        <name>Bescheid Einkommensteuer</name>
+        <anbringen>E1</anbringen>
+        <zrvon>2023</zrvon>
+        <zrbis>2023</zrbis>
+        <datbesch>2024-01-10</datbesch>
+        <erltyp>B</erltyp>
+        <fileart>PDF</fileart>
+        <ts_zust>2024-01-11T10:15:30Z</ts_zust>
+        <applkey>AAA111</applkey>
+        <filebez>ESt Bescheid</filebez>
+        <status>UNREAD</status>
+      </result>
+      <result>
+        <stnr>456</stnr>
+        <name>Mitteilung</name>
+        <anbringen>U1</anbringen>
+        <zrvon>2022</zrvon>
+        <zrbis>2022</zrbis>
+        <datbesch>2023-05-10</datbesch>
+        <erltyp>M</erltyp>
+        <fileart>XML</fileart>
+        <ts_zust>2023-05-11T08:00:00Z</ts_zust>
+        <applkey>BBB222</applkey>
+        <filebez>USt Mitteilung</filebez>
+        <status>READ</status>
+      </result>
+    </ns:getDataboxResponse>
+  </soapenv:Body>
+</soapenv:Envelope>
