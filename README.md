@@ -70,6 +70,8 @@ finanzonline list --all
 finanzonline list --read
 ```
 
+Defaults: list/sync only show UNREAD unless `--read` or `--all` is provided.
+
 ### Download a specific document
 
 ```bash
