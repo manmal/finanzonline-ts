@@ -1,9 +1,41 @@
 # finanzonline-ts
 
 [![CI](https://github.com/manmal/finanzonline-ts/actions/workflows/ci.yml/badge.svg)](https://github.com/manmal/finanzonline-ts/actions/workflows/ci.yml)
+[![npm](https://img.shields.io/npm/v/finanzonline-ts)](https://www.npmjs.com/package/finanzonline-ts)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Read-only TypeScript SDK and CLI for the Austrian FinanzOnline DataBox API.
+
+## Quick Start (npx)
+
+Download all unread Bescheide with a single command:
+
+```bash
+npx finanzonline-ts sync \
+  --tid YOUR_TID \
+  --benid YOUR_BENID \
+  --pin YOUR_PIN \
+  --herstellerid ATUxxxxxxxx \
+  --output-dir ./bescheide \
+  --erltyp B \
+  --all
+```
+
+Or list documents first:
+
+```bash
+npx finanzonline-ts list \
+  --tid YOUR_TID \
+  --benid YOUR_BENID \
+  --pin YOUR_PIN \
+  --herstellerid ATUxxxxxxxx \
+  --output-dir /tmp \
+  --all
+```
+
+> **Note:** You need a FinanzOnline WebService user (not your regular login). Create one in FinanzOnline under Admin → Benutzerverwaltung → Benutzer anlegen → Type "Webservice".
+
+---
 
 This is a TypeScript port of the Python package
 [finanzonline_databox](https://github.com/bitranox/finanzonline_databox) by
