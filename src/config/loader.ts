@@ -30,8 +30,8 @@ export function loadConfig(options: ConfigLoadOptions = {}): ConfigLoadResult {
   const startDir = options.startDir ?? process.cwd();
   const env = options.env ?? process.env;
 
-  const tomlResult = loadTomlConfig(options.configFile, startDir);
-  const dotenvResult = loadDotEnv(startDir);
+  const tomlResult = loadTomlConfig(options.configFile, startDir, env);
+  const dotenvResult = loadDotEnv(startDir, env);
   const envConfig = loadEnvConfig(env);
   const cliConfig = options.cli ?? {};
 
@@ -68,11 +68,15 @@ function validateConfig(config: FinanzonlineConfigInput): FinanzonlineConfig {
   }
 }
 
-function loadTomlConfig(configFile: string | undefined, startDir: string): {
+function loadTomlConfig(
+  configFile: string | undefined,
+  startDir: string,
+  env: NodeJS.ProcessEnv
+): {
   config: FinanzonlineConfigInput;
   path?: string;
 } {
-  const resolvedPath = configFile ?? findFileUpwards(startDir, "finanzonline.toml");
+  const resolvedPath = configFile ?? findFileUpwards(startDir, "finanzonline.toml", env);
   if (!resolvedPath) {
     return { config: {} };
   }
@@ -85,8 +89,11 @@ function loadTomlConfig(configFile: string | undefined, startDir: string): {
   return { config, path: resolvedPath };
 }
 
-function loadDotEnv(startDir: string): { config: FinanzonlineConfigInput; path?: string } {
-  const dotenvPath = findFileUpwards(startDir, ".env");
+function loadDotEnv(
+  startDir: string,
+  env: NodeJS.ProcessEnv
+): { config: FinanzonlineConfigInput; path?: string } {
+  const dotenvPath = findFileUpwards(startDir, ".env", env);
   if (!dotenvPath) {
     return { config: {} };
   }
@@ -152,7 +159,11 @@ function mergeConfigs(...configs: FinanzonlineConfigInput[]): FinanzonlineConfig
   return merged;
 }
 
-function findFileUpwards(startDir: string, filename: string): string | undefined {
+function findFileUpwards(
+  startDir: string,
+  filename: string,
+  env: NodeJS.ProcessEnv
+): string | undefined {
   let current = path.resolve(startDir);
 
   while (true) {
@@ -170,7 +181,7 @@ function findFileUpwards(startDir: string, filename: string): string | undefined
   }
 
   // Also check home directory
-  const homeDir = process.env.HOME ?? process.env.USERPROFILE;
+  const homeDir = env.HOME ?? env.USERPROFILE;
   if (homeDir) {
     const homeCandidate = path.join(homeDir, `.${filename}`);
     if (fs.existsSync(homeCandidate)) {
