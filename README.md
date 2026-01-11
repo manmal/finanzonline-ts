@@ -1,8 +1,7 @@
 # finanzonline-ts
 
-![CI](https://github.com/manmal/finanzonline-ts/actions/workflows/ci.yml/badge.svg)
-![npm](https://img.shields.io/npm/v/finanzonline-ts)
-![license](https://img.shields.io/npm/l/finanzonline-ts)
+[![CI](https://github.com/manmal/finanzonline-ts/actions/workflows/ci.yml/badge.svg)](https://github.com/manmal/finanzonline-ts/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Read-only TypeScript SDK and CLI for the Austrian FinanzOnline DataBox API.
 
