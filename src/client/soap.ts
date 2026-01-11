@@ -31,9 +31,9 @@ export function buildSoapEnvelope(
     .filter(([, value]) => value !== undefined && value !== null)
     .map(([key, value]) => {
       if (value instanceof Date) {
-        return `<${key}>${escapeXml(value.toISOString())}</${key}>`;
+        return `<ns:${key}>${escapeXml(value.toISOString())}</ns:${key}>`;
       }
-      return `<${key}>${escapeXml(String(value))}</${key}>`;
+      return `<ns:${key}>${escapeXml(String(value))}</ns:${key}>`;
     })
     .join("");
 
@@ -41,9 +41,9 @@ export function buildSoapEnvelope(
     `<?xml version="1.0" encoding="UTF-8"?>` +
     `<soapenv:Envelope xmlns:soapenv="${SOAP_ENV_NS}" xmlns:ns="${namespace}">` +
     `<soapenv:Body>` +
-    `<ns:${operation}>` +
+    `<ns:${operation}Request>` +
     serializedParams +
-    `</ns:${operation}>` +
+    `</ns:${operation}Request>` +
     `</soapenv:Body>` +
     `</soapenv:Envelope>`
   );
