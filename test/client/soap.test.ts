@@ -42,8 +42,8 @@ describe("soap utils", () => {
       ts_zust_von: new Date("2024-01-01T00:00:00Z")
     });
 
-    expect(xml).toContain("<ns:login>");
-    expect(xml).toContain("<tid>ABC</tid>");
+    expect(xml).toContain("<ns:loginRequest>");
+    expect(xml).toContain("<ns:tid>ABC</ns:tid>");
     expect(xml).toContain("2024-01-01T00:00:00.000Z");
   });
 

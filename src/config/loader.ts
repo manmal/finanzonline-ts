@@ -163,11 +163,27 @@ function findFileUpwards(startDir: string, filename: string): string | undefined
 
     const parent = path.dirname(current);
     if (parent === current) {
-      return undefined;
+      break;
     }
 
     current = parent;
   }
+
+  // Also check home directory
+  const homeDir = process.env.HOME ?? process.env.USERPROFILE;
+  if (homeDir) {
+    const homeCandidate = path.join(homeDir, `.${filename}`);
+    if (fs.existsSync(homeCandidate)) {
+      return homeCandidate;
+    }
+    // Also check without dot prefix
+    const homeCandidateNoDot = path.join(homeDir, filename);
+    if (fs.existsSync(homeCandidateNoDot)) {
+      return homeCandidateNoDot;
+    }
+  }
+
+  return undefined;
 }
 
 function formatZodError(error: unknown): string {
