@@ -88,4 +88,96 @@ describe("loadConfig", () => {
       ConfigurationError
     );
   });
+
+  it("finds .finanzonline.toml in home directory", () => {
+    const fakeHome = makeTempDir();
+    const workDir = makeTempDir();
+
+    fs.writeFileSync(
+      path.join(fakeHome, ".finanzonline.toml"),
+      [
+        "[finanzonline]",
+        "tid = 'HOMEDIR1'",
+        "benid = 'HOMEUSER'",
+        "pin = 'homesecret'",
+        "herstellerid = 'ATU99999999'",
+        "output_dir = '/tmp/home-output'"
+      ].join("\n")
+    );
+
+    const { config, sources } = loadConfig({
+      startDir: workDir,
+      env: { HOME: fakeHome }
+    });
+
+    expect(config.tid).toBe("HOMEDIR1");
+    expect(config.benid).toBe("HOMEUSER");
+    expect(config.pin).toBe("homesecret");
+    expect(config.herstellerid).toBe("ATU99999999");
+    expect(config.output_dir).toBe("/tmp/home-output");
+    expect(sources.tomlPath).toBe(path.join(fakeHome, ".finanzonline.toml"));
+  });
+
+  it("prefers local config over home directory config", () => {
+    const fakeHome = makeTempDir();
+    const workDir = makeTempDir();
+
+    fs.writeFileSync(
+      path.join(fakeHome, ".finanzonline.toml"),
+      [
+        "[finanzonline]",
+        "tid = 'HOMEDIR1'",
+        "benid = 'HOMEUSER'",
+        "pin = 'homesecret'",
+        "herstellerid = 'ATU99999999'",
+        "output_dir = '/tmp/home-output'"
+      ].join("\n")
+    );
+
+    fs.writeFileSync(
+      path.join(workDir, "finanzonline.toml"),
+      [
+        "[finanzonline]",
+        "tid = 'LOCALDIR'",
+        "benid = 'LOCALUSER'",
+        "pin = 'localsecret'",
+        "herstellerid = 'ATU11111111'",
+        "output_dir = '/tmp/local-output'"
+      ].join("\n")
+    );
+
+    const { config, sources } = loadConfig({
+      startDir: workDir,
+      env: { HOME: fakeHome }
+    });
+
+    expect(config.tid).toBe("LOCALDIR");
+    expect(config.benid).toBe("LOCALUSER");
+    expect(sources.tomlPath).toBe(path.join(workDir, "finanzonline.toml"));
+  });
+
+  it("finds finanzonline.toml without dot prefix in home directory", () => {
+    const fakeHome = makeTempDir();
+    const workDir = makeTempDir();
+
+    fs.writeFileSync(
+      path.join(fakeHome, "finanzonline.toml"),
+      [
+        "[finanzonline]",
+        "tid = 'HOMENODOT'",
+        "benid = 'NODOTUSER'",
+        "pin = 'nodotsecret'",
+        "herstellerid = 'ATU88888888'",
+        "output_dir = '/tmp/nodot-output'"
+      ].join("\n")
+    );
+
+    const { config, sources } = loadConfig({
+      startDir: workDir,
+      env: { HOME: fakeHome }
+    });
+
+    expect(config.tid).toBe("HOMENODOT");
+    expect(sources.tomlPath).toBe(path.join(fakeHome, "finanzonline.toml"));
+  });
 });
