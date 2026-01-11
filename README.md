@@ -11,7 +11,7 @@ Read-only TypeScript SDK and CLI for the Austrian FinanzOnline DataBox API.
 Download all unread Bescheide with a single command:
 
 ```bash
-npx finanzonline-ts sync \
+npx finanzonline sync \
   --tid YOUR_TID \
   --benid YOUR_BENID \
   --pin YOUR_PIN \
@@ -24,7 +24,7 @@ npx finanzonline-ts sync \
 Or list documents first:
 
 ```bash
-npx finanzonline-ts list \
+npx finanzonline list \
   --tid YOUR_TID \
   --benid YOUR_BENID \
   --pin YOUR_PIN \
